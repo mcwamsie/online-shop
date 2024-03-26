@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+from dotenv import load_dotenv
 import os
+
 from pathlib import Path
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,7 +78,6 @@ TEMPLATES = [
 ]
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-
 WSGI_APPLICATION = 'online_store.wsgi.application'
 
 # Database
@@ -136,3 +138,4 @@ LOGOUT_URL = 'store'
 CART_SESSION_ID = "online_shopping_cart"
 AUTH_USER_MODEL = 'user_auth.User'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")

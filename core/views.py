@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -9,6 +11,7 @@ from core.Cart import Cart
 from core.Recommender import get_similar_ids
 from core.forms import CartAddProductForm, Billing_Form, ContactFormSubmissionsForm
 from core.models import *
+from online_store import settings
 
 
 # Create your views here.
@@ -157,7 +160,8 @@ def get_contact_page(request):
         form = ContactFormSubmissionsForm()
 
     context = {
-        'form': form
+        'form': form,
+        'GOOGLE_MAPS_API_KEY': settings.GOOGLE_MAPS_API_KEY
     }
     return render(request, "contact/contact.html", context)
 

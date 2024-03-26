@@ -8,7 +8,7 @@
         <div class="container">
             <div id="mapBox" class="mapBox" data-lat="-17.357245" data-lon="30.195571" data-zoom="15"
                  data-info="PTC Winery"
-                 data-mlat="-17.357245" data-mlon="30.195571"> , 
+                 data-mlat="-17.357245" data-mlon="30.195571"> ,
             </div>
             <div class="row">
                 <div class="col-lg-4">
@@ -53,6 +53,6 @@
     <!--================Contact Area =================-->
 {% endblock %}
 {% block javascript %}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
 <script src="{% static 'js/gmaps.min.js' %}"></script>
 {% endblock %}
