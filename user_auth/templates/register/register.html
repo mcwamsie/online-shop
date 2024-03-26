@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block styles %}
+    <style>
+        .form-check{
+             display: inline;
+        }
+        .form-check:nth-child(1){
+
+            margin-right: 8px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include "register/banner.html" %}
+    <section class="login_box_area section_gap">
+        <div class="container">
+            <div class="row">
+                <!--
+                <div class="col-lg-6">
+                    <div class="login_box_img h-100">
+                        <img class="img-fluid h-100" src="{% static 'img/login.jpg' %}" alt="">
+                        <div class="hover">
+                            <h4>Already have an account?</h4>
+                            <p>There are advances being made in science and technology everyday, and a good example of
+                                this
+                                is the</p>
+                            <a class="primary-btn" href="/login">Login Here</a>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <div class="col-sm-12">
+                    <div class="login_form_inner">
+                        <h3>Sign up here</h3>
+                        <form style="max-width: 600px"
+                                class="login_form"
+                                action=""
+                                method="post" id="contactForm"
+                                novalidate="novalidate"
+                        >
+                          <div id='form-errors'>{{ form_errors }}</div>
+                            {% csrf_token %}
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    {{ form.username | as_crispy_field }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form.email | as_crispy_field }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form.first_name | as_crispy_field }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form.last_name | as_crispy_field }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form.date_of_birth | as_crispy_field }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form.gender | as_crispy_field }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form.password | as_crispy_field }}
+                                </div>
+                                <div class="col-sm-6">
+                                    {{ form.password2 | as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="form-group mt-5">
+                                <button
+                                        type="submit"
+                                        value="submit"
+                                        class="primary-btn"
+                                >
+                                    Signup
+                                </button>
+                                <a href="{% url "login" %}">Already registered? Login</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

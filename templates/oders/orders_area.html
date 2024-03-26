@@ -1,0 +1,39 @@
+{% load bootstrap4 %}
+<!--================Cart Area =================-->
+<section class="cart_area">
+
+    <div class="container">
+        <div class="cart_inner mt-4">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="width: 95px"></th>
+                        <th scope="col">Date</th>
+                        <th scope="col" class="text-center">Products (Qty)</th>
+                        <th scope="col" class="text-right">Total</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr class="s_product_text">
+                            <td class="card_area">
+                                <a href="{% url "single_order" pk=order.id %}" class="primary-btn text-white mr-0">
+                                   View
+                                </a>
+                            </td>
+                            <td>{{ order.created_at | date:"d/m/Y H:i" }}</td>
+                            <td class="text-center">{{ order.quantity }}</td>
+                            <td class="text-right">${{ order.total_price }}</td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->

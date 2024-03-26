@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% include "register/banner.html" %}
+    <div class="d-flex align-items-center flex-column py-4 justify-content-center">
+        <h1>Registration Successful</h1>
+        <a
+                href="/login"
+                type="button"
+                class="primary-btn w-75"
+        >
+            Log In
+        </a>
+
+    </div>
+
+
+{% endblock %}

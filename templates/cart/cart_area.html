@@ -1,0 +1,110 @@
+{% load bootstrap4 %}
+<!--================Cart Area =================-->
+<section class="cart_area">
+
+    <div class="container">
+        <div class="cart_inner mt-4">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in cart %}
+                        <tr>
+                            <td class="p-1">
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <a class="text-dark" href="/store/product/{{ item.product.id }}">
+                                            <img height="50" src="/media/{{ item.product.image }}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a class="text-dark"
+                                           href="/store/product/{{ item.product.id }}">{{ item.product.name }}</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="p-1">
+                                <h5>${{ item.price }}</h5>
+                            </td>
+                            <td class="text-center p-1" style="width: 180px">
+                                <form
+
+                                        class="product_count d-flex align-items-center"
+                                        action="/store/cart/{{ item.product.id }}"
+                                        method="post"
+                                >
+                                    {% csrf_token %}
+                                    <div class="product_count">
+                                        <input name="update" value="True" type="hidden">
+                                        <input value="{{ item.quantity }}" type="text" name="quantity" id="sst" maxlength="12" title="Quantity:" class="input-text qty">
+                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;" class="increase items-count" type="button">
+                                            <i class="lnr lnr-chevron-up"></i>
+                                        </button>
+                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;" class="reduced items-count" type="button">
+                                            <i class="lnr lnr-chevron-down"></i>
+                                        </button>
+                                    </div>
+
+                                    <button
+                                            type="submit"
+                                            class="ml-2"
+                                    >Update
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-right p-1">
+                                <h5>${{ item.total_price }}</h5>
+                            </td>
+                            <td class="text-center">
+                                <a class="text-dark" href="/store/cart/delete/{{ item.product.id }}" class="ml-2">
+                                    <span class="lnr lnr-trash"></span>
+                                </a>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <h5>Subtotal</h5>
+                        </td>
+
+                        <td class="text-right">
+                            <h5>${{ cart.get_total_price }}</h5>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr class="out_button_area">
+                        <td>
+
+                        </td>
+
+
+                        <td colspan="3">
+                            <div class="m-0 checkout_btn_inner d-flex align-items-center">
+                                <a class="ml-auto gray_btn text-nowrap" href="/store/shop">Continue Shopping</a>
+                                <a   class="primary-btn" href="{% if total == 0 and request.user.is_authenticated %}/store/checkout{% else %}#{% endif %}">Proceed to checkout</a>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->

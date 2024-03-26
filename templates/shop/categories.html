@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+    {% include "shop/categories-banner.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-categories">
+                    <div class="head">Browse Categories</div>
+                    <ul class="main-categories">
+                        <li class="main-nav-list">
+                                <a href="./" >
+                                    --All--
+                                </a>
+                        </li>
+                        {% for category in categories %}
+                            <li class="main-nav-list">
+                                <a data-toggle="collapse" href="#cat-{{ category.id }}" aria-expanded="false"
+                                   aria-controls="fruitsVegetable">
+                                    <span class="lnr lnr-arrow-right"></span>
+                                    {{ category.name }}
+                                </a>
+                                <ul class="collapse" id="cat-{{ category.id }}" data-toggle="collapse"
+                                    aria-expanded="false" aria-controls="fruitsVegetable">
+                                    {% for style in category.styles %}
+                                        <li class="main-nav-list child">
+                                            <script>
+                                                function appendToUrl(key, value) {
+                                                    let searchParams = new URLSearchParams(window.location.search);
+                                                    searchParams.set(key, value);
+                                                    window.location = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString()
+                                                    // window.history.pushState({path: newurl}, '', newurl);
+                                                }
+                                            </script>
+                                            <a href="#" onclick='appendToUrl("style", "{{ style.name }}")'>
+                                                {{ style.name }}
+                                                <span class="number">
+                                                    ({{ style.count }})
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+
+                        {% endfor %}
+
+
+                    </ul>
+                </div>
+                <div class="sidebar-filter mt-50">
+                    <div class="top-filter-head">Product Filters</div>
+                    <div class="common-filter">
+                        <div class="head">Brands</div>
+                        <form action="#">
+                            <ul>
+                                {% for brand in brands %}
+                                    <li class="filter-list">
+                                        <a
+                                                onclick='appendToUrl("brand", "{{ brand.name }}")'
+                                                href="#"
+                                                class="text-dark"
+                                        >
+                                        <span
+                                                class="pixel-radio"
+                                                type="radio"
+                                                id="apple"
+                                                name="brand-{{ brand.id }}"
+                                        ></span>
+                                            <img
+                                                    style="object-fit: cover; width: 30px; height: 30px"
+                                                    src="/media/{{ brand.logo }}"
+                                                    alt="{{ brand.name }}"
+                                                    class="mr-2"
+                                            >
+                                            <span for="apple">
+                                            {{ brand.name }} &nbsp;
+                                            <span class="number">
+                                                ({{ brand.count }})
+                                            </span>
+                                        </span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-7">
+                {% include "shop/filter_bar.html" %}
+                <!-- Start Best Seller -->
+                <section class="lattest-product-area pb-40 category-list">
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-lg-4 col-md-6">
+                                <a href="/store/product/{{ product.id }}"  class="single-product d-block">
+                                <img
+                                        style="object-fit: cover; aspect-ratio: 280/351"
+                                        class="img-fluid"
+                                        src="/media/{{ product.image }}"
+                                        alt=""
+                                >
+                                <div class="product-details">
+                                    <h6
+                                        style="white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow:ellipsis; "
+
+                                    >{{ product.name }}</h6>
+                                    <div class="price">
+                                        <h6>${{ product.price }}</h6>
+                                    </div>
+                                    <div class="prd-bottom">
+                                    </div>
+                                </div>
+                            </a>
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+                </section>
+                <!-- End Best Seller -->
+                {% include "shop/filter_bar.html" %}
+
+            </div>
+        </div>
+    </div>
+    {% include "shop/featured_products.html" %}
+{% endblock %}

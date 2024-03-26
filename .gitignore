@@ -1,0 +1,26 @@
+.env
+
+staticfiles
+media
+# Ignore Django Migrations in Development if you are working on team
+venv
+.idea
+.vscode
+# Only for Development only
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+
+# Only for Development only
+**/__pycache__/**
+!**/__pycache__
+!**/__pycache__/__init__.py
+
+.ipynb_checkpoints
+database.sqlite3
+Untitled.ipynb
+Untitled1.ipynb
+Untitled2.ipynb
+online.sqlite3
+
+

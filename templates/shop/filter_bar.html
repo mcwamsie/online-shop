@@ -1,0 +1,50 @@
+<!-- Start Filter Bar -->
+<div class="filter-bar d-flex flex-wrap align-items-center">
+    <div class="sorting mr-auto">
+        <select>
+            <option value="1">Show 1</option>
+            <option value="1">Show 2</option>
+            <option value="1">Show 3</option>
+        </select>
+    </div>
+
+    <div class="pagination">
+        {% if products.has_previous %}
+            <a
+                    onclick='appendToUrl("page", "{{ products.previous_page_number }}")'
+                    href="#"
+                    class="prev-arrow"
+            >
+                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+            </a>
+        {% endif %}
+        {% for i in products.paginator.page_range %}
+            {% if products.number == i %}
+                <a href="#" class="active">
+                    {{ i }}
+                </a>
+            {% else %}
+                <a
+                        onclick='appendToUrl("page", "{{ i }}")'
+                        href="#">
+                    {{ i }}
+                </a>
+            {% endif %}
+        {% endfor %}
+
+
+
+
+        {% if products.has_next %}
+            <a
+                    onclick='appendToUrl("page", "{{ products.next_page_number }}")'
+                    href="#"
+                    class="next-arrow"
+            >
+                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </a>
+        {% endif %}
+
+    </div>
+</div>
+<!-- End Filter Bar -->

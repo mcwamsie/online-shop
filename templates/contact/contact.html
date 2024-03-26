@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% block content %}
+    {% include "contact/banner.html" %}
+    <!--================Contact Area =================-->
+    <section class="contact_area section_gap_bottom">
+        <div class="container">
+            <div id="mapBox" class="mapBox" data-lat="-17.357245" data-lon="30.195571" data-zoom="15"
+                 data-info="PTC Winery"
+                 data-mlat="-17.357245" data-mlon="30.195571"> , 
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="contact_info">
+                        <div class="info_item">
+                            <i class="lnr lnr-home"></i>
+                            <h6>Chinhoyi, Zimbabwe</h6>
+                            <p>24 Robert Mugabe Way</p>
+                        </div>
+                        <div class="info_item">
+                            <i class="lnr lnr-phone-handset"></i>
+                            <h6><a href="#">+263 73 795 6029</a></h6>
+                            <p>Mon to Fri 9am to 6 pm</p>
+                        </div>
+                        <div class="info_item">
+                            <i class="lnr lnr-envelope"></i>
+                            <h6><a href="#">sales@ptcwinery.co.zw</a></h6>
+                            <p>Send us your query anytime!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <form class="row contact_form" action="" method="post" id="contactForm" novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="col-md-6">
+                            {{ form.name | as_crispy_field }}
+                            {{ form.emailAddress | as_crispy_field }}
+                            {{ form.subject | as_crispy_field }}
+
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.message | as_crispy_field }}
+                        </div>
+                        <div class="col-md-12 text-right">
+                            <button type="submit" value="submit" class="primary-btn">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Contact Area =================-->
+{% endblock %}
+{% block javascript %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+<script src="{% static 'js/gmaps.min.js' %}"></script>
+{% endblock %}

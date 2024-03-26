@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Wishlist</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="{% url "shop_home" %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="#">Wishlist</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cart_area">
+
+    <div class="container">
+        <div class="cart_inner mt-4">
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in wishlist %}
+                        <tr class="s_product_text">
+
+                            <td class="p-1">
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <a class="text-dark" href="{% url "product_view" pk=item.id %}">
+                                            <img height="50" src="/media/{{ item.product.image }}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a class="text-dark"
+                                           href="/store/product/{{ item.product.id }}">{{ item.product.name }}</a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- End Banner Area -->
+{% endblock %}

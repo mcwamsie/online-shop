@@ -1,0 +1,72 @@
+{% load bootstrap4 %}
+<!--================Single Product Area =================-->
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<div class="s_Product_carousel">
+                        <div class="single-prd-item">
+							<img
+                                    class="img-fluid"
+                                    src="/media/{{ product.image }}" alt=""
+                            >
+						</div>
+                        <div class="single-prd-item">
+							<img
+                                    class="img-fluid"
+                                    src="/media/{{ product.image }}" alt=""
+                            >
+						</div>
+                        <div class="single-prd-item">
+							<img
+                                    class="img-fluid"
+                                    src="/media/{{ product.image }}" alt=""
+                            >
+						</div>
+
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<h3>{{ product.name }}</h3>
+						<h2>${{ product.price }}</h2>
+						<ul class="list">
+							<li>
+                                <a class="active" href="/store/shop?style={{ product.style.name }}">
+                                    <span>Category</span> : {{ product.style.name }}</a>
+                            </li>
+							<li>
+                                <a href="#">
+                                    <span>Availibility</span> :
+                                    {% if product.quantity  > 0%}
+                                        In Stock
+                                        {% else %}
+                                        Unavailable
+                                    {% endif %}
+                                </a>
+                            </li>
+						</ul>
+						<p>{{ product.desc }}</p>
+                        <form id="cart-form" class="card_area d-flex align-items-center" action="/store/cart/{{ product.id }}" method="post" class="add">
+                            <div class="product_count">
+							<label for="qty">Quantity:</label>
+							<input type="text" name="quantity" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+						</div>
+                            {% csrf_token %}
+                        </form>
+                    <div onclick="document.getElementById('cart-form').submit()" class="card_area d-flex align-items-center">
+							<a class="primary-btn" href="#">Add to Cart</a>
+							<a class="icon_btn" href="{% url "wishlist" %}?productId={{ product.id }}"><i class="lnr lnr lnr-heart"></i></a>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--================End Single Product Area =================-->

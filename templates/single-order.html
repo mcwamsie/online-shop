@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block content %}
+    {% include "oders/banner.html" %}
+    <section class="order_details section_gap">
+		<div class="container">
+			<div class="row order_d_inner">
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Order Info</h4>
+						<ul class="list">
+							<li><a href="#"><span>Order number</span> : {{ order.id }}</a></li>
+							<li><a href="#"><span>Date</span> : {{ order.created_at | date:"d/m/Y H:i" }}</a></li>
+                            <li><a href="#"><span>Name</span> : {{ order.first_name }} {{ order.last_name }}</a></li>
+                            <li><a href="#"><span>Phone</span> : {{ order.phone_number }}</a></li>
+                            <li><a href="#"><span>Email</span> : {{ order.email_address }}</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Billing Address</h4>
+						<ul class="list">
+							<li><a href="#"><span>Street</span> : {{ order.streetAddress }}</a></li>
+							<li><a href="#"><span>City</span> : {{ order.town_or_city }}</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Shipping Address</h4>
+						<ul class="list">
+							<li><a href="#"><span>Street</span> : {{ order.shipping_address }}</a></li>
+							<li><a href="#"><span>City</span> : {{ order.shipping_town_or_city }}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="order_details_table">
+				<h2>Order Details</h2>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Product</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+						<tbody>
+                        {% for o_product in products %}
+                            <tr>
+								<td>
+									<p>{{ o_product.product.name }}</p>
+								</td>
+								<td>
+									<h5>x{{ o_product.quantity }}</h5>
+								</td>
+								<td>
+									<p>${{ o_product.total_price }}</p>
+								</td>
+							</tr>
+                        {% endfor %}
+
+
+							<tr>
+								<td>
+									<h4>Total</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p>${{ order.total_price }}</p>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

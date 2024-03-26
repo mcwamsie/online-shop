@@ -1,0 +1,51 @@
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% load static %}
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row no-gutter">
+            <div class="col-lg-6">
+
+                <div class="login_form_inner d-flex" style="align-items: center; flex-direction: column">
+                    <h3>Log in to enter</h3>
+
+                    <form class="login_form" action="" method="post" id="contactForm"
+                          novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12">
+                                {{ form.username | as_crispy_field }}
+                            </div>
+                            <div class="col-12">
+                                {{ form.password | as_crispy_field }}
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group mt-3">
+                                    <button type="submit" value="submit" class="primary-btn">Log In</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div  class="login_box_img m-0">
+                    <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology everyday, and a good example of this
+                            is the</p>
+                        <a class="primary-btn" href="/signup">Create an Account</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
